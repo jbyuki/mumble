@@ -25,8 +25,9 @@ auto tokenize(const std::string& s) -> std::vector<std::string>
 	for(char c : s) {
 		if(std::isspace(c)) {
 			@add_word_to_words
+		} else if(std::ispunct(c)) {
 		} else {
-			word += c;
+			word += std::tolower(c);
 		}
 	}
 	@add_word_to_words

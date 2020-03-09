@@ -13,7 +13,7 @@ auto main(int argc, char* argv[]) -> int
 	@tokenize_sentences
 	@check_line_ref_in_range
 	@compute_scores
-	@output_most_similar_sentence
+	@output_3_most_similar_sentence
 	return 0;
 }
 
@@ -32,6 +32,7 @@ std::string filename = argv[1];
 std::istringstream iss(argv[2]);
 size_t line_ref;
 iss >> line_ref;
+line_ref--;
 
 if(iss.fail()) {
 	std::cerr << "ERROR: Second argument must be integer!" << std::endl;
@@ -145,6 +146,12 @@ for(size_t i=0; i<line_words.size(); ++i) {
 	scores.push_back(similarity_score(line_words[i], line_words[line_ref]));
 }
 
-@output_most_similar_sentence=
-auto best_score = std::max_element(scores.begin(), scores.end());
-std::cout << std::distance(scores.begin(), best_score) << std::endl;
+@output_3_most_similar_sentence=
+for(int i=0; i<3; ++i) {
+	auto best_score = std::max_element(scores.begin(), scores.end());
+	if(*best_score == 0.f) {
+		break;
+	}
+	std::cout << std::distance(scores.begin(), best_score)+1 << std::endl;
+	*best_score = 0.f;
+}
