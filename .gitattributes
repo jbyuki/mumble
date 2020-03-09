@@ -1,1 +1,3 @@
+Makefile linguist-generated=false
+CMakeLists.txt linguist-generated=false
 *.t linguist-generated=true
