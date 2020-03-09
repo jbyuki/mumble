@@ -141,6 +141,7 @@ auto similarity_score(const std::vector<size_t>& w1, const std::vector<size_t>& 
 std::vector<float> scores;
 for(size_t i=0; i<line_words.size(); ++i) {
 	if(i == line_ref) {
+		scores.push_back(0.f);
 		continue;
 	}
 	scores.push_back(similarity_score(line_words[i], line_words[line_ref]));
